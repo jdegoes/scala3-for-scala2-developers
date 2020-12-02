@@ -1,4 +1,4 @@
 // DO NOT EDIT! This file is auto-generated.
-// This file enables sbt-bloop to create bloop config files.
+// This file enables semantic information to be produced by sbt.
 
-addSbtPlugin("ch.epfl.scala" % "sbt-bloop" % "1.4.5-6-4768184c")
+addSbtPlugin("org.scalameta" % "sbt-metals" % "0.9.7")
