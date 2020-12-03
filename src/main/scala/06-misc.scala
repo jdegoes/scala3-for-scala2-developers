@@ -44,7 +44,16 @@ object explicit_nulls:
    */
   // val stringOrNull: String = null
 
-  def bar = 1
+  
+  /**
+   * EXERCISE 2
+   * 
+   * Test to see if `value` is NOT equal to null, and if it is NOT equal to null, then place the 
+   * variable into another local variable that can only be `String`. Then print it out to the 
+   * console. Explain your findings.
+   */
+  def printOutOnlyIfString(value: String | Null): Unit = ???
+
 
 /**
  * CREATOR APPLICATIONS
