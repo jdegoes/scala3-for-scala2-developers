@@ -156,5 +156,13 @@ object context_functions:
     mul
   }
 
-  type Programmable[A] = Program ?=> A
+  /**
+   * EXERCISE 1
+   * 
+   * Define a small DSL for building HTML.
+   */
+  def p: HTML[Unit] = ???
+
+  type HTML[+A] = StringBuilder ?=> A
+  
 

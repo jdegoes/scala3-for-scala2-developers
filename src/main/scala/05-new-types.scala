@@ -362,13 +362,79 @@ object type_lambdas:
    * Define a `Sizable` for `Map` for the given key type `K`. You will have to 
    * use a type lambda.
    */
-  def sizableMap[K]: Sizable[[V] =>> Map[K, V]] = ???
+  def sizableMap[K] = ???
 
   /**
    * EXERCISE 2
+   * 
+   * Define a type-level function `Flip` that accepts a type constructor (`[*, *] => *`), and 
+   * returns another type constructor that merely flips the order of type parameters to the first 
+   * type constructor.
+   */
+  type Flip[F[_, _]]
+
+  /**
+   * EXERCISE 3
+   * 
+   * Use the `Flip` type constructor you defined to flip the order of type parameters to `Map`.
+   */
+  type FlippedMap[K, V]
+
+  /**
+   * EXERCISE 4
+   * 
+   * Define a type-level function `Curry` that accepts a type constructor (`[*, *] => *`), and 
+   * returns another type constructor that takes one type parameter, and returns another type 
+   * constructor which takes one type parameter, returning the type constructed by the original 
+   * type constructor, fully applied with both type parameters.
+   */
+  type Curry[F[_, _]]
+
+  /**
+   * EXERCISE 5
    * 
    * When `-Ykind-projector` is specified, Dotty will emulate kind-projector 
    * syntax. Partially apply `Map` to the key type parameter with `K`, using the 
    * placeholder `*` for the value type parameter.
    */
   // def sizableMap2[K] = sizableMap[K]
+
+/**
+ * SINGLETON TYPES
+ * 
+ * Literals in Scala now have their own singleton types, which are subtypes of their broader types.
+ * For example, the value `true` has a subtype of `Boolean`, namely, `true`. Singleton types
+ * provide additional precision and are a relatively simple change to the language that is useful 
+ * in conjunction with type-level and metaprogramming.
+ */
+object singleton_types:
+  /**
+   * EXERCISE 1
+   * 
+   * Explicitly ascribe this literal value a singleton type.
+   */
+  val trueValue = true
+
+  /**
+   * EXERCISE 2
+   * 
+   * Test to see if `true` is a subtype of `Boolean` by using the helper type function 
+   * `IsSubtypeOf`.
+   */
+  type trueSubtypeBoolean
+
+  /**
+   * EXERCISE 3
+   * 
+   * Explicitly ascribe this literal value a singleton type.
+   */
+  val stringValue = "name"
+
+  /**
+   * EXERCISE 4
+   * 
+   * Explicitly ascribe this literal value a singleton type.
+   */
+  val floatValue = 3.1415f  
+
+  infix type IsSubtypeOf[A, B >: A]

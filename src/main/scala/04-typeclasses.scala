@@ -6,7 +6,7 @@
  * inheritance hierarchy of those data types, providing the power of "mixin" interfaces, but 
  * with additional flexibility that plays well with third-party data types.
  */
-object type_classes:
+object typeclass_basics:
   trait PrettyPrint[-A]:
     extension (a: A) def prettyPrint: String
 
@@ -75,8 +75,34 @@ object type_classes:
 
   import scala.CanEqual._ 
 
+object given_scopes:
+  trait Hash[-A]:
+    extension (a: A) def hash: Int
+
+  object HashGivens:
+    given Hash[Int] = _.hashCode
+    given Hash[Long] = _.hashCode
+    given Hash[Float] = _.hashCode
+    given Hash[Double] = _.hashCode
+
   /**
-   * EXERCISE 8
+   * EXERCISE 1
+   * 
+   * Import the right given into the scope (but ONLY this given) so the following code will compile.
+   */
+  // 12.hash 
+
+  /**
+   * EXERCISE 2
+   * 
+   * Import the right given into the scope (but ONLY this given) so the following code will compile.
+   */
+  // 12.123.hash   
+
+  
+object typeclass_derives:
+  /**
+   * EXERCISE 1
    * 
    * Using the `derives` clause, derive an instance of the type class `Eql` for 
    * `Color`.
@@ -111,3 +137,45 @@ object conversions:
    * conversion works as intended.
    */
   Rational(1, 2)
+
+object typeclass_graduation:
+  /**
+   * EXERCISE 1
+   * 
+   * Add cases to this enum for every primitive type in Scala.
+   */
+  enum PrimType[A]:
+    case Int extends PrimType[Int]
+  
+  /**
+   * EXERCISE 2
+   * 
+   * Add another case to `Data` to model enumerations, like `Either`.
+   */
+  enum Data:
+    case Record(fields: Map[String, Data])
+    case Primitive[A](primitive: A, primType: PrimType[A])
+    case Collection(elements: Vector[Data])
+
+  /**
+   * EXERCISE 3
+   * 
+   * Develop a type class called `EncodeData[A]`, that can encode an `A` into `Data`.
+   */
+  trait EncodeData[A]
+
+  /**
+   * EXERCISE 4
+   * 
+   * In the companion object of `Data`, write encoders for different primitive types in Scala,
+   * including lists and collections.
+   */
+  object EncodeData
+
+  /**
+   * EXERCISE 5
+   * 
+   * Create an instance of `EncodeData` for `Person`.
+   */
+  final case class Person(name: String, age: Int)
+  object Person
