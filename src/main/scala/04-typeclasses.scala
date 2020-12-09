@@ -79,38 +79,63 @@ object given_scopes:
   trait Hash[-A]:
     extension (a: A) def hash: Int
 
-  object HashGivens:
+  object Hash:
     given Hash[Int] = _.hashCode
     given Hash[Long] = _.hashCode
     given Hash[Float] = _.hashCode
     given Hash[Double] = _.hashCode
 
-  /**
-   * EXERCISE 1
-   * 
-   * Import the right given into the scope (but ONLY this given) so the following code will compile.
-   */
-  // 12.hash 
+  object givens {
+    /**
+     * EXERCISE 1
+     * 
+     * Import the right given into the scope (but ONLY this given) so the following code will compile.
+     */
+    // 12.hash 
 
-  /**
-   * EXERCISE 2
-   * 
-   * Import the right given into the scope (but ONLY this given) so the following code will compile.
-   */
-  // 12.123.hash   
+    /**
+     * EXERCISE 2
+     * 
+     * Import the right given into the scope (but ONLY this given) so the following code will compile.
+     */
+    // 12.123.hash   
+  }
+
+  object usings:
+    /**
+     * EXERCISE 3
+     * 
+     * Adding the right `using` clause to this function so that it compiles.
+     */
+    def hashingInts = ??? // 12.hash 
+
+    /**
+     * EXERCISE 4
+     * 
+     * Adding the right `using` clause to this function so that it compiles.
+     */
+    def hashingDoubles = ??? // 12.123.hash   
 
   
 object typeclass_derives:
   /**
    * EXERCISE 1
    * 
-   * Using the `derives` clause, derive an instance of the type class `Eql` for 
+   * Using the `derives` clause, derive an instance of the type class `CanEqual` for 
    * `Color`.
    */
   enum Color:
     case Red 
     case Green 
     case Blue
+
+  /**
+   * EXERCISE 2
+   * 
+   * Using the `derives` clause, derive an instance of the type class `CanEqual` for 
+   * `Person`.
+   */
+  final case class Person(name: String, age: Int)
 
 /**
  * IMPLICIT CONVERSIONS

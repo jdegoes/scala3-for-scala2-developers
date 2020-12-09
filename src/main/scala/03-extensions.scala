@@ -55,13 +55,13 @@ object ext_methods:
   implicit class StringOps(self: String):
     def equalsIgnoreCase(that: String) = self.toLowerCase == that.toLowerCase
 
-  object scope:
-    extension (s: String) def isSherlock: Boolean = s.startsWith("Sherlock")
-
   /**
    * EXERCISE 6
    * 
    * Import the extension method `isSherlock` into the following object so the code will compile.
    */
   object test:
-    // "John Watson".isSherlock
+    val test: Boolean = ??? // "John Watson".isSherlock
+
+  object string_extensions:
+    extension (s: String) def isSherlock: Boolean = s.startsWith("Sherlock")
