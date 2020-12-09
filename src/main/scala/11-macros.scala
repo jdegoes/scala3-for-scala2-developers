@@ -35,13 +35,8 @@ object macro_basics:
    */
   def exprString: Expr[String] = ???
 
-  /**
-   * EXERCISE 3
-   * 
-   * Try to construct an `Expr[String]` from a string parameter by using quotation and note your 
-   * findings.
-   */
-  inline def exprString2(inline expr: String)(using Quotes): Expr[String] = ???
+
+
 
   
 
