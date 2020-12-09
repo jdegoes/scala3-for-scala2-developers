@@ -2,7 +2,7 @@ object welcome:
   //
   // Please join and say hello:
   //
-  // CHAT ROOM: https://discord.gg/dAbfksd
+  // CHAT ROOM: https://discord.gg/bc62QxMWqd
   //
   // Please git clone and build:
   //
