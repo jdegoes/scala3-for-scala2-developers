@@ -178,21 +178,6 @@ object match_types:
       case String => Float 
       case Float => String
 
-  /**
-   * EXERCISE 8
-   * 
-   * When used on polymorphic type parameters, match functions may produce unexpected results.
-   * Using the `Bigger` match type, compute the element type of a polymorphic parameter, and 
-   * try to return a value of this type.
-   */
-  def testPolyParam[A](a: A): Bigger[A] = ???
-
-  type Bigger[A] = 
-    A match
-      case Float => Double 
-      case Int => Long 
-      case ? => A
-
 /**
  * OPAQUE TYPES
  * 
@@ -398,6 +383,58 @@ object type_lambdas:
    * placeholder `*` for the value type parameter.
    */
   // def sizableMap2[K] = sizableMap[K]
+
+
+/**
+ * CONTEXT FUNCTIONS
+ * 
+ * Scala 3 introduces context functions, which are functions that depend on some context.
+ */
+object context_functions:
+  trait Program:
+    def addOp(op: Op): Unit 
+  object Program:
+    def make(): Program = 
+      var ops = List.empty[Op]
+      new Program:
+        def addOp(op: Op): Unit = 
+          ops = op :: ops
+
+
+  def addOp(op: Op)(using p: Program) = 
+    p.addOp(op)
+
+  enum Op:
+    case PushInt(v: Int)
+    case Pop
+    case Mul 
+    case Sub
+    case Add
+
+  def op(o: Op): Program ?=> Unit = addOp(o)
+
+  def pushInt(i: Int): Program ?=> Unit = op(Op.PushInt(i))
+  val mul: Program ?=> Unit = op(Op.Mul)
+
+  def program[A](f: Program ?=> A): A = 
+    given Program = Program.make()
+    f 
+
+  program {
+    pushInt(12)
+    pushInt(23)
+    mul
+  }
+
+  /**
+   * EXERCISE 1
+   * 
+   * Define a small DSL for building HTML.
+   */
+  def p: HTML[Unit] = ???
+
+  type HTML[+A] = StringBuilder ?=> A
+
 
 /**
  * SINGLETON TYPES
