@@ -40,8 +40,10 @@ object macro_basics:
    * 
    * Turn this function into a macro by adding `inline` and delegating implementation to 
    * the compile-time function `assertEqualsImpl`. You will have to use splice and quote.
+   * 
+   * Also inline the parameters so they will be fully expanded in the macro.
    */
-  def assertEquals[A](inline expected: A, inline actual: A): Unit = ???
+  def assertEquals[A](expected: A, actual: A): Unit = ???
 
   /**
    * EXERCISE 4
