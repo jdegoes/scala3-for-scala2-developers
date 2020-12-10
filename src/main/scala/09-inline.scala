@@ -204,5 +204,14 @@ object selective_summon:
    */
   inline def setFor[T]: Set[T] = ???
 
+object inline_params:
+  inline val LoggingLevel = 1
 
-
+  /**
+   * EXERCISE 1
+   * 
+   * Use inline parameters to ensure the following has no runtime overhead
+   * unless logging is enabled.
+   */
+  def log(level: Int, line: String): Unit = 
+    if (level >= LoggingLevel) println(line)
