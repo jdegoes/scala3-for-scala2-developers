@@ -72,7 +72,7 @@ object macro_basics:
      * 
      * Capture some details about the representation of the type into the 
      * `TypeDetails` structure. You may find documentation 
-     * [here](https://dotty.epfl.ch/-scala%203/-a-p-i/scala/quoted/-quotes/reflect-module.html).
+     * [here](https://github.com/lampepfl/dotty/blob/master/library/src/scala/quoted/Quotes.scala).
      */
     def inspectTypeRepr(repr: TypeRepr): Expr[TypeDetails] = 
       '{TypeDetails()}
