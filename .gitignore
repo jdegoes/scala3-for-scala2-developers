@@ -4,3 +4,5 @@ target
 .vscode
 .bloop
 project/project
+project/metals.sbt
+*.tasty
