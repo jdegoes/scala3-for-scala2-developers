@@ -2,10 +2,11 @@ import scala.deriving._
 import scala.compiletime.{erasedValue, summonInline}
 
 object typeclass_deriving:
+
   inline def summonAll[A <: Tuple]: List[Show[?]] = 
     inline erasedValue[A] match
       case _: EmptyTuple => Nil
-      case _: (t *: ts) => summonInline[Show[t]] :: summonAll[ts]
+      case _: (t *: ts)  => summonInline[Show[t]] :: summonAll[ts]
 
   trait Show[A]:
     def show(x: A): String
@@ -18,7 +19,6 @@ object typeclass_deriving:
       elem.asInstanceOf[Show[Any]].show(x)
 
     def iterator[A](p: A) = p.asInstanceOf[Product].productIterator
-
     def showSum[A](s: Mirror.SumOf[A], elems: => List[Show[?]]): Show[A] =
       (x: A) => showElem(elems(s.ordinal(x)))(x)
 
@@ -27,7 +27,7 @@ object typeclass_deriving:
         case (x, elem) => showElem(elem)(x)
       }.mkString(", ")
 
-    inline given derived[A](using m: Mirror.Of[A]) as Show[A] =
+    inline given derived[A](using m: Mirror.Of[A]): Show[A] =
       lazy val elemInstances = summonAll[m.MirroredElemTypes]
       inline m match 
         case s: Mirror.SumOf[A]     => showSum(s, elemInstances)
