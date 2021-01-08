@@ -37,16 +37,16 @@ object match_expressions:
  * and type safe.
  */
 object enhanced_dynamic:
-  class Record(elems: (String, Any)*) extends Selectable {
+  class ARecord(elems: (String, Any)*) extends Selectable {
     private val fields = elems.toMap
     def selectDynamic(name: String): Any = fields(name)
   }
-  type Person = Record {
+  type Person = ARecord {
     val name: String
     val age: Int
   }
 
-  val person = Record("name" -> "Emma", "age" -> 42).asInstanceOf[Person]
+  val person = ARecord("name" -> "Emma", "age" -> 42).asInstanceOf[Person]
 
 /**
  * WILDCARD
