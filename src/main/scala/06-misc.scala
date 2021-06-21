@@ -1,4 +1,31 @@
 /**
+ * TOP-LEVEL DEFINITIONS
+ * 
+ * Scala 3 allows top-level definitions (variables, methods, and type aliases).
+ */
+package top_level:
+  /**
+   * EXERCISE 1
+   * 
+   * Define a top-level type alias for `List[String]` called `ListString`.
+   */
+  type ListString 
+
+  /**
+   * EXERCISE 2
+   * 
+   * Define a top-level method called `helloWorld` which prints out "Hello World!".
+   */
+  def helloWorld = ???
+
+  /**
+   * EXERCISE 3
+   * 
+   * Define a top-level variable called `pi` which is approximately equal to the value of pi.
+   */
+  lazy val pi = ???
+
+/**
  * TRAIT PARAMETERS
  *
  * Scala 3 introduces trait parameters, which solve a lot of messy initialization order

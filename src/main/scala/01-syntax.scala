@@ -275,7 +275,8 @@ package underscores:
   /**
    * EXERCISE 2
    * 
-   * Change these wildcard types to use `?` instead of `_`.
+   * In Scala 3, "type wildcards" are changing to use `?` instead of `_`. In the following snippet,
+   * change the wildcard types to use `?` instead of `_`.
    */
   // def serializeMap(map: Map[_ <: String, _ <: String]) = ???
   type Dummy
