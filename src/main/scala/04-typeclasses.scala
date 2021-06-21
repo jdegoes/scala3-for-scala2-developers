@@ -10,7 +10,7 @@ object typeclass_basics:
   trait PrettyPrint[-A]:
     extension (a: A) def prettyPrint: String
 
-  given PrettyPrint[String]:
+  given PrettyPrint[String] with
     extension (a: String) def prettyPrint: String = a
 
   "foo".prettyPrint
@@ -62,7 +62,7 @@ object typeclass_basics:
    * With the help of both `given` and `using`, create an instance of the `PrettyPrint` type class
    * for a generic `List[A]`, given an instance of `PrettyPrint` for the type `A`.
    */
-  given [A] as PrettyPrint[List[A]]:
+  given [A]: PrettyPrint[List[A]] with
     extension (a: List[A]) def prettyPrint: String = ???
 
   /**
