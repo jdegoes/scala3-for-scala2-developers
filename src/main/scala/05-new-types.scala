@@ -496,3 +496,17 @@ object singleton_types:
   val floatValue = 3.1415f  
 
   infix type IsSubtypeOf[A, B >: A]
+
+/**
+ * TRANSPARENT TRAITS
+ * 
+ * Transparent traits can be suppressed in type inference to eliminate noise in type errors.
+ */
+object transparent_traits:
+  /**
+   * EXERCISE 1
+   * 
+   * Mark the following trait as transparent by using the `transparent` keyword.
+   */
+  trait KryoSerialize
+
