@@ -103,18 +103,25 @@ object given_scopes:
 
   object usings:
     /**
-     * EXERCISE 3
+     * EXERCISE 1
      * 
      * Adding the right `using` clause to this function so that it compiles.
      */
-    def hashingInts = ??? // 12.hash 
+    def hashing[T](value: T) = ??? // value.hash 
 
     /**
-     * EXERCISE 4
+     * EXERCISE 2
      * 
      * Adding the right `using` clause to this function so that it compiles.
      */
     def hashingDoubles = ??? // 12.123.hash   
+
+    /**
+     * EXERCISE 3
+     * 
+     * Intersperse normal parameters with their `using Hash[X]` for those parameters.
+     */
+    def intersperse[A, B, C, D] = ???
 
   
 object typeclass_derives:
