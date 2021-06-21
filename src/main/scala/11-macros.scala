@@ -1,4 +1,4 @@
-import scala.quoted._
+import scala.quoted.*
 
 /**
  * MACROS
@@ -65,7 +65,7 @@ object macro_basics:
   def inspectType[A]: TypeDetails = ???
 
   def inspectTypeImpl[A](using quotes: Quotes, tpe: Type[A]): Expr[TypeDetails] =
-    import quotes.reflect._ 
+    import quotes.reflect.* 
 
     /**
      * EXERCISE 6

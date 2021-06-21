@@ -34,8 +34,9 @@ package enums:
   /**
    * EXERCISE 2
    * 
-   * Explore interop with Java enums by finding all values of `DayOfWeek`, and by 
-   * finding the value corresponding to the string "Sunday".
+   * Augment `DayOfWeek` with Java enum compatibility, by extending `Enum[DayOfWeek]`. Then explore 
+   * this interop with Java enums by finding all values of `DayOfWeek`, and by finding the value 
+   * corresponding to the string "Sunday".
    */
   def daysOfWeek: Array[DayOfWeek] = ???
   def sunday: DayOfWeek = ???
@@ -128,5 +129,23 @@ package case_classes:
  */  
 object pattern_matching:
   /**
+   * EXERCISE 1
+   * 
+   * Remove the unsound usage of `ClassTag` from this pattern match, replacing it with `Typeable`.
    */
-  def foo: Int = 2
+  // def getT[T: scala.reflect.ClassTag](list: List[Any]): Option[T] = 
+  //   list match 
+  //     case (head : T) :: _ => Some(head)
+  //     case _ => None 
+
+  val h :: t = ::("foo", Nil)
+
+  /**
+   * EXERCISE 2
+   * 
+   * Scala 3 more strongly checks patterns. Add some more irrefutable patterns to this `for` 
+   * comprehension.
+   */
+  for
+    (l, r) <- Some((19, 42))
+  yield l + r

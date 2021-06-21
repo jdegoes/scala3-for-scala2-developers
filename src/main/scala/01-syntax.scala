@@ -79,6 +79,8 @@ package optional_braces:
    * EXERCISE 8
    * 
    * Refactor this match clause so that it does not utilize curly braces.
+   * 
+   * NOTE: Try to unindent the match cases and see what happens.
    */
   def joke(v: String) = 
     v match {
@@ -233,3 +235,79 @@ package control_flow:
     val numbers = List(1, 2, 9, 3, -1, 6, 5, 2)
     
     for (i <- numbers) println(i * i)
+
+  /**
+   * EXERCISE 5
+   * 
+   * Scala is powerful enough to define custom control flow operators, such as this `whileDo` 
+   * method. Scala 3 is experimenting with a way to eliminate braces for these custom control flow
+   * operators, available in nightlies and snapshots.
+   */
+  def whileDo(pred: => Boolean)(body: => Any): Any = 
+    if pred then
+      body 
+      whileDo(pred)(body)
+    else ()
+  // import language.experimental.fewerBraces
+  // def exampleWhileDo = 
+  //   var i = 0 
+  //   whileDo(i < 10):
+  //     i = i + 1
+  //   
+
+/**
+ * UNDERSCORE
+ * 
+ * The usages of the underscore parameter have greatly decreased in Scala 3.
+ */
+package underscores:
+  object Utility {
+    def helloWorld = println("Hello World!")
+  }
+
+  /**
+   * EXERCISE 1
+   * 
+   * Refactor this import to use `*` instead of `_`.
+   */
+  // import Utility._ 
+
+  /**
+   * EXERCISE 2
+   * 
+   * Change these wildcard types to use `?` instead of `_`.
+   */
+  // def serializeMap(map: Map[_ <: String, _ <: String]) = ???
+  type Dummy
+
+/**
+ * MISCELLANEOUS 
+ * 
+ * Scala 3 makes miscellaneous syntax changes or improvements.
+ */
+object misc_syntax:
+  enum PaymentMethod:
+    case Amex 
+    case Visa
+    case MasterCard 
+
+  /**
+   * EXERCISE 1
+   * 
+   * Change the infix match operator into a method call.
+   */
+  PaymentMethod.Amex match
+    case PaymentMethod.Amex => "It's an amex!"
+    case _ => "It's something else!"
+
+  /**
+   * EXERCISE 2
+   * 
+   * Scala 3 changes the syntax for vararg patterns. Update the pattern 
+   * match to compile using `*`.
+   */
+  final case class Person(name: String, friends: List[Person])
+
+  // Person("Sherlock Holmes", Nil) match {
+  //   case Person(name, friends: _*) => 
+  // }

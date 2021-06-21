@@ -1,4 +1,4 @@
-import scala.deriving._
+import scala.deriving.*
 import scala.compiletime.{erasedValue, summonInline}
 
 object typeclass_deriving:

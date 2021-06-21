@@ -85,7 +85,7 @@ object inline_transparent:
   val zero: Option[Natural] = Natural(0)
 
 object inline_conditional:
-  import scala.compiletime._
+  import scala.compiletime.*
 
   final case class Natural(value: Int)
   object Natural:
@@ -141,7 +141,7 @@ object inline_match:
   def two: Succ[Succ[Zero.type]] = Succ(Succ(Zero))
 
 object compiletime:
-  import scala.compiletime._ 
+  import scala.compiletime.*
   /**
    * EXERCISE 1
    * 

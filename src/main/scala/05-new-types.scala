@@ -228,7 +228,7 @@ object opaque_types:
     extension (e: Email) def username: String = ???
   end email_example
 
-  import email_example._
+  import email_example.*
 
   /**
    * EXERCISE 3
@@ -267,7 +267,7 @@ object opaque_types:
     end Natural
   end natural_example
 
-  import natural_example._
+  import natural_example.*
 
   /**
    * EXERCISE 7

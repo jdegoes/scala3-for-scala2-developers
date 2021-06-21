@@ -73,7 +73,7 @@ object typeclass_basics:
    */
   // given vectorPrettyPrint[A] as ...
 
-  import scala.CanEqual._ 
+  import scala.CanEqual.*
 
 object given_scopes:
   trait Hash[-A]:
