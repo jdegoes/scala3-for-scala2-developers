@@ -28,8 +28,8 @@ object ext_methods:
   /**
    * EXERCISE 3
    * 
-   * Add an extension method to `Option[A]` that can zip one option with another `Option[B]`, to 
-   * return an `Option[(A, B)]`.
+   * Add an extension method to `Int` called `split` that can package up the high 16 bits and 
+   * low 16 bits into a tuple of two ints, containing the two parts.
    */
   // extension 
 
@@ -41,9 +41,9 @@ object ext_methods:
   /**
    * EXERCISE 4
    * 
-   * Add a collection of extension methods to `Rational`, including `+`, to add two rational 
-   * numbers, `*`, to multiply two rational numbers, and `-`, to subtract one rational number 
-   * from another rational number.
+   * Extension methods may be operators, such as `+` or `-`. Add a collection of extension methods 
+   * to `Rational`, including `+`, to add two rational numbers, `*`, to multiply two rational 
+   * numbers, and `-`, to subtract one rational number from another rational number.
    */
   // extension
 
@@ -65,3 +65,32 @@ object ext_methods:
 
   object string_extensions:
     extension (s: String) def isSherlock: Boolean = s.startsWith("Sherlock")
+
+  /**
+   * EXERCISE 7
+   * 
+   * Extension methods may be generic. Define a generic extension method called `uncons`, which 
+   * works on any `List[A]`, and which returns an `Option[(A, List[A])]` (either `None` if the list 
+   * is empty, or otherwise the head and tail in a tuple).
+   */
+  object list_extensions:
+    val test: Option[(String, List[String])] = ??? // List("foo", "bar").uncons
+
+  /**
+   * EXERCISE 8
+   * 
+   * Add another generic extension method called `zip` to `Option[A]`, which takes an `Option[B]`, 
+   * and returns an `Option[(A, B)]`.
+   */
+  object option_extensions:
+    val test: Option[(Int, String)] = ??? // Some(123).zip(Some("foo"))
+
+  /**
+   * EXERCISE 9
+   * 
+   * One possible application of extension methods is adding methods to generic types of a certain
+   * shape. For example, adding `flatten` to a `List[List[A]]`, but not to other types.
+   * Add `mapInside` method to `List[Option[A]]` to map on the `A` inside the futures.
+   */
+  object list_future_extensions:
+    val digits: List[Option[Int]] = ??? // List(Some("12"), None, Some("321")).mapInside(_.length)
