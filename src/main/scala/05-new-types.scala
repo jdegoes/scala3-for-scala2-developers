@@ -392,8 +392,9 @@ object type_lambdas:
    * constructor which takes one type parameter, returning the type constructed by the original 
    * type constructor, fully applied with both type parameters.
    */
-  type Curry[F[_, _]] = [A] =>> [B] =>> F[A, B]
+  type Curry[F[_, _]]
 
+  // Not supported... 
   // type Uncurry[F[_][_]] = [A, B] =>> F[A][B]
 
   /**
