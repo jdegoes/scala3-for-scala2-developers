@@ -183,3 +183,31 @@ object open_classes:
    */
   class ConsoleLogger extends BaseLogger:
     override val logger = println(_)
+
+/**
+ * INFIX OPERATORS
+ * 
+ * Scala 3 makes infix syntax "opt-in" to provide a more uniform experience.
+ */
+object infix:
+  final case class Predicate[-A](evaluate: A => Boolean):
+    self =>
+      def and[A1 <: A](that: Predicate[A1]): Predicate[A1] = 
+        Predicate(a1 => self.evaluate(a1) && that.evaluate(a1))
+
+      def or[A1 <: A](that: Predicate[A1]): Predicate[A1] = 
+        Predicate(a1 => self.evaluate(a1) || that.evaluate(a1))
+
+      def negate: Predicate[A] = Predicate(a => !evaluate(a))
+
+  def isGreaterThan(n: Int): Predicate[Int] = Predicate(_ > n)
+  def isLessThan(n: Int): Predicate[Int] = Predicate(_ < n)
+  def isEqualTo(n: Int): Predicate[Int] = Predicate(_ == n)
+
+  /**
+   * EXERCISE 1
+   * 
+   * Make the following code compile by adding the `infix` keyword to the `or` operator.
+   */
+  // val example = isGreaterThan(12) or isEqualTo(0)
+
