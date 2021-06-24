@@ -1,4 +1,4 @@
-def assertTypesEqual[A, B >: A <: A]: Unit = ()
+def assertTypesEqual[A, B](implicit ev: A =:= B): Unit = ()
 
 object welcome:
   // Please join and say hello:

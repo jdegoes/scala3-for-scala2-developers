@@ -11,9 +11,10 @@
  * 
  * Intersection types are useful to describe types having all the members of other types.
  * 
- * Commutativity: A & B == B & A
- * Associativity: (A & B) & C == A & (B & C)
- * A & Nothing == Nothing
+ * Commutativity:  A & B == B & A
+ * Associativity:  (A & B) & C == A & (B & C)
+ * Annihilation:   A & Nothing == Nothing
+ * Identity:       A & Any == Any 
  * Distributivity: A & (B | C) == A & B | A & C
  */
 object intersection_types:
@@ -69,7 +70,8 @@ object intersection_types:
  * Commutativity: A | B == B | A
  * Associativity: A | (B | C) == (A | B) | C
  * Identity:      A | Nothing == A 
- * forall B >: A: A | B == B
+ * Annihilation:  A | Any = Any
+ * Subsumption:   forall B >: A: A | B == B
  */
 object union_types:
   final case class PaymentDenied(message: String)
@@ -82,7 +84,7 @@ object union_types:
    * Form the union of the types `PaymentDenied` and `MissingAddress` using the type union 
    * operator `|`.
    */
-  type PaymentDeniedOrMissingAddress = PaymentDenied | MissingAddress
+  type PaymentDeniedOrMissingAddress
 
   /**
    * EXERCISE 2
@@ -451,12 +453,54 @@ object context_functions:
   /**
    * EXERCISE 1
    * 
-   * Define a small DSL for building HTML.
+   * Define a small DSL for building HTML by adding a few functions like `p`, `h1`, etc., 
+   * which use context functions to pass around a string builder that is used for printing the 
+   * HTML fragments.
    */
-  def p: HTML[Unit] = ???
+  def text(string: String): HTML[Unit] = ???
+  def p[A](inner: HTML[A]): HTML[A] = ???
 
   type HTML[+A] = StringBuilder ?=> A
 
+  def makeHtml[A](html: HTML[A]): A = {
+    given StringBuilder = new StringBuilder()
+
+    html
+  }
+
+  val example = 
+    makeHtml {
+      p(text("Hello World!"))
+    }
+  
+  import scala.concurrent.* 
+  type Task[+A] = ExecutionContext ?=> A
+
+  /**
+   * EXERCISE 2
+   * 
+   * In any "multi-parameter" context function `A ?=> B ?=> ... Z`, Scala can adapt the order of 
+   * the context parameters. Try this for yourself by passing `permutation2` into the function 
+   * `acceptsPermutation1`.
+   */
+  def permutation1: HTML[Task[Unit]] = ???
+  def permutation2: Task[HTML[Unit]] = ???
+  def acceptsPermutation1(p: HTML[Task[Unit]]): Unit = () 
+  acceptsPermutation1(???)
+
+  /**
+   * EXERCISE 3
+   * 
+   * Unlike contravariant reader effects (e.g. environment in ZIO), context functions do not infer.
+   * Add type ascriptions to make this code compile.
+   */
+  // def composed = compose(task, html)
+
+  def compose[A, B, C, D](left: A ?=> B, right: C ?=> D): A ?=> C ?=> (B, D) = 
+    (left, right)
+
+  def task: Task[String] = ??? 
+  def html: HTML[Int] = ???
 
 /**
  * SINGLETON TYPES
