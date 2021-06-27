@@ -90,7 +90,7 @@ object ext_methods:
    * 
    * One possible application of extension methods is adding methods to generic types of a certain
    * shape. For example, adding `flatten` to a `List[List[A]]`, but not to other types.
-   * Add `mapInside` method to `List[Option[A]]` to map on the `A` inside the futures.
+   * Add `mapInside` method to `List[Option[A]]` to map on the `A` inside the options.
    */
-  object list_future_extensions:
+  object list_option_extensions:
     val digits: List[Option[Int]] = ??? // List(Some("12"), None, Some("321")).mapInside(_.length)
